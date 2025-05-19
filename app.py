@@ -34,7 +34,7 @@ if uploaded_h5ad is not None:
     st.sidebar.success("🧬 AnnData uploaded!")
 
 # Tabs
-tabs = st.tabs(["🏠 Home", "🧹 Preprocessing", "🤖 ML Pipeline", "🧬 DEG", "📊 Gene Expression Visualization", "🐳 Dockerization Overview", "👥 Team Information"])
+tabs = st.tabs(["🏠 Home", "🧹 Preprocessing", "🤖 ML Pipeline", "👥 Team Information"])
 
 # ---------------- Tab 1: Home ----------------
 with tabs[0]:
@@ -121,62 +121,10 @@ with tabs[2]:
             ax.set_title("Predicted vs Actual")
             st.pyplot(fig)
 
-# ---------------- Tab 4: DEG ----------------
+
+# ---------------- Tab 4 ----------------
+
 with tabs[3]:
-    st.header("🧬 Differential Expression Analysis")
-
-    if adata is not None:
-        if len(adata.obs.columns) == 0:
-            st.warning("AnnData has no annotations in `.obs`. Please provide clustering info.")
-        else:
-            cluster_col = st.selectbox("Group by column", adata.obs.columns)
-            method = st.radio("Method", ["t-test", "wilcoxon"])
-            sc.tl.rank_genes_groups(adata, groupby=cluster_col, method=method)
-            st.subheader("Top 5 DE genes")
-            st.dataframe(sc.get.rank_genes_groups_df(adata, group=None).head())
-
-            st.subheader("DEG Plot")
-            fig = sc.pl.rank_genes_groups(adata, sharey=False, show=False)
-            st.pyplot(fig)
-
-
-# ---------------- Tab 5 ----------------
-with tabs[4]:
-    st.header("📊 Gene Expression Visualization")
-
-    if adata is not None:
-        gene = st.text_input("Enter gene name to visualize:")
-        if gene:
-            try:
-                fig1 = sc.pl.violin(adata, gene, groupby="cell_type", show=False)
-                fig2 = sc.pl.umap(adata, color=gene, show=False)
-                st.pyplot()
-            except Exception as e:
-                st.error(f"Error: {e}")
-
-# ---------------- Tab 6 ----------------
-with tabs[5]:
-    st.header("🐳 Dockerization Overview")
-    st.markdown("""
-    **Dockerfile snippet:**
-
-    ```Dockerfile
-    FROM python:3.10
-    WORKDIR /app
-    COPY . /app
-    RUN pip install -r requirements.txt
-    CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.enableCORS=false"]
-    ```
-
-    **To build and run:**
-    ```bash
-    docker build -t bio-app .
-    docker run -p 8501:8501 bio-app
-    ```
-    """)
-
-# ---------------- Tab 7 ----------------
-with tabs[6]:
     st.header("👥 Team Information")
     st.markdown("""
     - **George** – ML Developer  
