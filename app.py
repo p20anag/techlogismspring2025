@@ -19,7 +19,6 @@ tabs = st.tabs([
     "🤖 ML Pipeline",
     "🧬 DEG + Volcano",
     "📊 Expression Plots",
-    "🐳 Docker Info",
     "👥 Team"
 ])
 
@@ -202,25 +201,7 @@ with tabs[4]:
                     sc.pl.umap(adata, color=gene, show=False, ax=ax2)
                     st.pyplot(fig2)
 
-# Tab 6 - Docker Info
+# Tab 6 - Team
 with tabs[5]:
-    st.header("🐳 Docker Overview")
-    st.markdown("""
-    ```Dockerfile
-    FROM python:3.10
-    WORKDIR /app
-    COPY . /app
-    RUN pip install -r requirements.txt
-    CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.enableCORS=false"]
-    ```
-
-    ```bash
-    docker build -t bio-app .
-    docker run -p 8501:8501 bio-app
-    ```
-    """)
-
-# Tab 7 - Team
-with tabs[6]:
     st.header("👥 Team")
     st.markdown("- George – ML Developer")
