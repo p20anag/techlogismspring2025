@@ -10,4 +10,8 @@ docker build -t my-streamlit-app .
 
 docker run -p 8501:8501 my-streamlit-app
 
-Εναλλακτικά στο terminal εισάγεται την εντολή "streamlit run app.py"
+Εναλλακτικά στο terminal εισάγεται τις εντολές 
+
+pip install requierments.txt
+
+streamlit run app.py
