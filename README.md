@@ -9,3 +9,5 @@
 docker build -t my-streamlit-app .
 
 docker run -p 8501:8501 my-streamlit-app
+
+Εναλλακτικά στο τέρμιναλ εισάγεται την εντολή "streamlit run app.py"
