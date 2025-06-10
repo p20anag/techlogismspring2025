@@ -12,6 +12,6 @@ docker run -p 8501:8501 my-streamlit-app
 
 Εναλλακτικά στο terminal εισάγεται τις εντολές 
 
-pip install requierments.txt
+pip install -r requierments.txt
 
 streamlit run app.py
